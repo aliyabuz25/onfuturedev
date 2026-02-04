@@ -425,12 +425,12 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .hero-heading {
     font-family: var(--Font-Family-Headline, "DM Sans");
-    font-size: var(--Font-Size-48, 48px);
+    font-size: 72px;
     font-weight: 400 !important;
-    line-height: var(--Line-Height-56, 56px);
+    line-height: 84px;
     color: var(--Neutral-Color-50, #FFF);
     text-align: center;
-    max-width: 900px;
+    max-width: 964px;
     margin: 16px auto 4px;
     width: 100%;
     letter-spacing: -0.01em;
