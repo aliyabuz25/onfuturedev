@@ -345,7 +345,7 @@ function initPage() {
         if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
           originalTexts[key] = element.placeholder;
         } else {
-          originalTexts[key] = element.textContent;
+          originalTexts[key] = element.innerHTML;
         }
       }
     });
@@ -359,7 +359,7 @@ function initPage() {
         if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
           element.placeholder = originalText;
         } else {
-          element.textContent = originalText;
+          element.innerHTML = originalText;
         }
       }
     });
@@ -374,7 +374,7 @@ function initPage() {
         if (element.tagName === "INPUT" || element.tagName === "TEXTAREA") {
           element.placeholder = translation;
         } else {
-          element.textContent = translation;
+          element.innerHTML = translation;
         }
       }
     });
