@@ -729,10 +729,9 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .hero-cta {
     display: flex;
-    width: auto;
-    min-width: 154px;
-    height: 52px;
-    padding: 0 24px;
+    width: 130px;
+    height: 48px;
+    padding: 0;
     justify-content: center;
     align-items: center;
     gap: 8px;
@@ -741,15 +740,16 @@ body>div[id$="-container"]:not(#hero-container) {
     color: var(--Neutral-Color-1000, #0A0A0A);
     text-align: center;
     font-family: var(--Font-Family-Button, Poppins);
-    font-size: 16px;
+    font-size: 14px;
     font-style: normal;
     font-weight: 500;
-    /* Slightly bolder for clarity */
     line-height: 1;
     margin: 0 auto;
     border: none;
     cursor: pointer;
     position: relative;
+    top: -3px;
+    /* Pulled up by 3px */
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
