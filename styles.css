@@ -2289,7 +2289,8 @@ body>div[id$="-container"]:not(#hero-container) {
 
     .hero,
     #hero,
-    .scholarship-banner {
+    .scholarship-banner,
+    .site-footer {
         width: calc(100% + 80px);
         margin-left: -40px;
         margin-right: -40px;
