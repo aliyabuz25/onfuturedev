@@ -241,11 +241,64 @@
         display: flex;
         align-items: center;
         gap: 4px;
-        color: var(--Neutral-Color-500, #737373);
+        color: var(--Neutral-Color-1000, #0A0A0A);
         font-size: 16px;
         font-family: Poppins;
-        font-weight: 400;
+        font-weight: 500;
         line-height: 24px;
+    }
+
+    /* Phone Dropdown Styles */
+    .hero-phone-input {
+        position: relative;
+    }
+
+    .hero-phone-prefix {
+        cursor: pointer;
+        transition: background 0.2s;
+        user-select: none;
+    }
+
+    .hero-phone-prefix:hover {
+        background: rgba(0, 0, 0, 0.02);
+    }
+
+    .hero-phone-dropdown {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 140px;
+        background: #fff;
+        border: 1px solid var(--Neutral-Color-200, #DDD);
+        border-radius: 12px;
+        margin-top: 8px;
+        box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        display: none;
+        z-index: 100;
+        overflow: hidden;
+    }
+
+    .hero-phone-dropdown.show {
+        display: block;
+    }
+
+    .hero-phone-item {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 16px;
+        cursor: pointer;
+        transition: background 0.2s;
+    }
+
+    .hero-phone-item:hover {
+        background: var(--Neutral-Color-100, #F7F6F6);
+    }
+
+    .hero-phone-item img {
+        width: 20px;
+        height: 20px;
+        object-fit: contain;
     }
 
     .hero-contact-submit {
@@ -526,15 +579,29 @@
                     <div class="hero-contact-phone">
                         <div class="hero-contact-label" data-i18n-key="hero.contact.form.phone">Telefon Nömrəsi</div>
                         <div class="hero-phone-input">
-                            <div class="hero-phone-prefix">
-                                <div class="hero-phone-flag">
-                                    <img src="/flags/Flags.svg" alt="Azerbaijan flag" width="24" height="24">
+                            <div class="hero-phone-prefix" id="phoneDropdownToggle">
+                                <div class="hero-phone-flag" id="selectedPhonePrefix">
+                                    <img src="https://flagcdn.com/az.svg" alt="Azerbaijan" width="24" height="24">
                                     <div>+994</div>
                                 </div>
                                 <img src="/elements/lsicon_down-outline.svg" alt="Down arrow" width="24" height="24">
                             </div>
+                            <div class="hero-phone-dropdown" id="phoneDropdownMenu">
+                                <div class="hero-phone-item" data-prefix="+994" data-flag="https://flagcdn.com/az.svg">
+                                    <img src="https://flagcdn.com/az.svg" alt=""> <span>+994</span>
+                                </div>
+                                <div class="hero-phone-item" data-prefix="+90" data-flag="https://flagcdn.com/tr.svg">
+                                    <img src="https://flagcdn.com/tr.svg" alt=""> <span>+90</span>
+                                </div>
+                                <div class="hero-phone-item" data-prefix="+1" data-flag="https://flagcdn.com/us.svg">
+                                    <img src="https://flagcdn.com/us.svg" alt=""> <span>+1</span>
+                                </div>
+                                <div class="hero-phone-item" data-prefix="+44" data-flag="https://flagcdn.com/gb.svg">
+                                    <img src="https://flagcdn.com/gb.svg" alt=""> <span>+44</span>
+                                </div>
+                            </div>
                             <div class="hero-phone-field">
-                                <input type="tel" name="phone" placeholder="55-898-09-09">
+                                <input type="tel" name="phone" placeholder="55-898-09-09" id="phoneInput">
                             </div>
                         </div>
                     </div>

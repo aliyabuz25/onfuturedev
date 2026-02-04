@@ -765,6 +765,31 @@ function initPage() {
   setupTestimonials();
   setupApplicationRedirects();
 
+  const setupPhoneDropdown = () => {
+    const toggle = document.getElementById('phoneDropdownToggle');
+    const menu = document.getElementById('phoneDropdownMenu');
+    const selected = document.getElementById('selectedPhonePrefix');
+    if (!toggle || !menu || !selected) return;
+
+    toggle.addEventListener('click', (e) => {
+      e.stopPropagation();
+      menu.classList.toggle('show');
+    });
+
+    document.querySelectorAll('.hero-phone-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const prefix = item.dataset.prefix;
+        const flag = item.dataset.flag;
+        selected.innerHTML = `<img src="${flag}" alt="" width="24" height="24"> <div>${prefix}</div>`;
+        menu.classList.remove('show');
+      });
+    });
+
+    document.addEventListener('click', () => {
+      menu.classList.remove('show');
+    });
+  };
+
   toggle?.addEventListener("click", toggleMenu);
   menu?.addEventListener("click", (event) => event.stopPropagation());
   document.addEventListener("click", closeMenu);
@@ -773,6 +798,7 @@ function initPage() {
       closeMenu();
     }
   });
+  setupPhoneDropdown();
   setActiveNavByPath(navLinks);
 }
 

@@ -26,18 +26,9 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // --- Middleware ---
+// Temporarily disabling full Helmet to debug "white screen" issue on localhost
 app.use(helmet({
-  contentSecurityPolicy: {
-    directives: {
-      ...helmet.contentSecurityPolicy.getDefaultDirectives(),
-      "img-src": ["'self'", "data:", "https:"],
-      "script-src": ["'self'", "'unsafe-inline'", "https://cdn.jsdelivr.net"],
-      "style-src": ["'self'", "'unsafe-inline'", "https://fonts.googleapis.com", "https://cdn.jsdelivr.net"],
-      "font-src": ["'self'", "data:", "https://fonts.gstatic.com", "https://cdn.jsdelivr.net"],
-      "connect-src": ["'self'", "https://cdn.jsdelivr.net"],
-      "upgrade-insecure-requests": null,
-    },
-  },
+  contentSecurityPolicy: false,
   crossOriginResourcePolicy: { policy: "cross-origin" }
 }));
 app.use(morgan('combined'));
@@ -87,8 +78,16 @@ app.get('/cdn', async (req, res) => {
 
 // 3. Fallback for SPA (only for routes that don't match files)
 app.use((req, res) => {
-  // If it's an API request, return 404 instead of index.html
+  // If it's an API request, return 404
   if (req.path.startsWith('/api')) return res.status(404).json({ error: 'API Not Found' });
+
+  // If the path has an extension, it's a missing file, not a navigation route
+  const ext = path.extname(req.path);
+  if (ext && ext !== '.html') {
+    return res.status(404).send('Not Found');
+  }
+
+  // Otherwise, serve index.html for SPA-like navigation
   res.sendFile(path.join(ROOT, 'index.html'));
 });
 
