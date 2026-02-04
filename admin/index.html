@@ -396,10 +396,14 @@
         async function uploadGlobal(input) {
             const file = input.files[0];
             if (!file) return;
+
+            const formData = new FormData();
+            formData.append('file', file);
+
             try {
-                const res = await fetch(`/api/upload?name=${encodeURIComponent(file.name)}`, {
+                const res = await fetch('/api/upload', {
                     method: 'POST',
-                    body: file
+                    body: formData
                 });
                 const data = await res.json();
                 if (res.ok) {

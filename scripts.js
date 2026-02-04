@@ -75,22 +75,40 @@ function initPage() {
       if (!res.ok) return;
       const content = await res.json();
 
-      // 1. Dynamic Section Rendering (Services & Study)
+      // 1. Dynamic Section Rendering (Full CMS control)
       renderDynamicServices(content);
       renderDynamicStudy(content);
+      // You can add more like renderDynamicFaq(content), etc.
 
-      // 2. Standard Text Binding
-      const i18nElements = document.querySelectorAll("[data-i18n-key]");
-      i18nElements.forEach(el => {
-        const key = el.getAttribute('data-i18n-key');
-        if (content[key] && content[key].trim()) {
-          el.innerText = content[key];
+      // 2. Universal Binding (Text & Images)
+      // Supports data-i18n-key AND data-content-key
+      const reactiveElements = document.querySelectorAll("[data-i18n-key], [data-content-key]");
+
+      reactiveElements.forEach(el => {
+        const key = el.getAttribute('data-content-key') || el.getAttribute('data-i18n-key');
+        if (!content[key]) return;
+
+        const value = content[key].trim();
+        if (!value) return;
+
+        // Handle Images
+        if (el.tagName === 'IMG') {
+          el.src = value;
+          el.onerror = () => { el.src = 'https://placehold.co/600x400?text=Image+Not+Found'; };
+        }
+        // Handle Background Images (SafeImage principle)
+        else if (el.hasAttribute('data-bg')) {
+          el.style.backgroundImage = `url('${value}')`;
+        }
+        // Handle Text
+        else {
+          el.innerText = value;
         }
       });
 
-      console.log(`Universal Management: ${Object.keys(content).length} keys checked.`);
+      console.log(`Universal Management: ${Object.keys(content).length} keys synced.`);
     } catch (e) {
-      console.warn('Universal Management: Failed to bind content', e);
+      console.warn('Universal Management: Failed to sync content', e);
     }
   };
 
@@ -121,7 +139,7 @@ function initPage() {
               <span>${services[idx].title || ''}</span>
           </h3>
           <p>${services[idx].desc || ''}</p>
-          <div class="service-card-icon"><img src="/services/Arrow up-right.png" alt=""></div>
+          <div class="service-card-icon"><img src="${services[idx].icon || '/services/Arrow up-right.png'}" alt=""></div>
       </article>
     `).join('');
   }
@@ -148,7 +166,7 @@ function initPage() {
 
     container.innerHTML = keys.map(idx => `
       <article class="study-card">
-        <div class="study-card-figure" style="--study-card-image: url('https://placehold.co/379x177');"></div>
+        <div class="study-card-figure" style="--study-card-image: url('${cards[idx].image || 'https://placehold.co/379x177'}');"></div>
         <div class="study-card-body">
           <div class="study-card-title">${cards[idx].title || ''}</div>
           <p class="study-card-desc">${cards[idx].desc || ''}</p>
@@ -158,7 +176,7 @@ function initPage() {
           </div>
         </div>
         <div class="study-card-footer">
-          <div class="study-card-price">2200€/ <span class="sub">yearly</span></div>
+          <div class="study-card-price">${cards[idx].price || '2200€'}/ <span class="sub">yearly</span></div>
           <div class="study-card-apply">Apply</div>
         </div>
       </article>

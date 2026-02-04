@@ -1,0 +1,30 @@
+{
+  "name": "onfuture-w2",
+  "version": "1.0.0",
+  "description": "OnFuture Agency – Xaricdə təhsil, viza dəstəyi və peşəkar proqramlaşdırma kursları mərkəzi.",
+  "main": "optimization.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oktotechaz/onfuture-web-2.1.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/oktotechaz/onfuture-web-2.1/issues"
+  },
+  "homepage": "https://github.com/oktotechaz/onfuture-web-2.1#readme",
+  "dependencies": {
+    "express": "^5.2.1",
+    "helmet": "^8.1.0",
+    "morgan": "^1.10.1",
+    "multer": "^2.0.2",
+    "rate-limiter-flexible": "^9.1.0",
+    "xss-clean": "^0.1.4"
+  }
+}
