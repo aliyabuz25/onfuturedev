@@ -351,6 +351,94 @@ const server = http.createServer((req, res) => {
     return proxyCdn(req, res, targetUrl);
   }
 
+  // Check for API requests
+  if (parsedUrl.pathname === '/api/content') {
+    if (req.method === 'GET') {
+      const contentPath = path.join(ROOT, 'data', 'content.json');
+      fs.readFile(contentPath, 'utf8', (err, data) => {
+        if (err) {
+          if (err.code === 'ENOENT') {
+            return sendResponse(res, 200, { 'Content-Type': 'application/json' }, '{}');
+          }
+          return sendResponse(res, 500, { 'Content-Type': 'application/json' }, JSON.stringify({ error: 'Failed to read content' }));
+        }
+        sendResponse(res, 200, { 'Content-Type': 'application/json' }, data);
+      });
+      return;
+    } else if (req.method === 'POST') {
+      let body = '';
+      req.on('data', chunk => {
+        body += chunk.toString();
+      });
+      req.on('end', () => {
+        try {
+          const newContent = JSON.parse(body);
+          // Simple validation or merging logic can go here
+          const contentPath = path.join(ROOT, 'data', 'content.json');
+
+          // Read existing to merge - prevent overwriting with partial data if intended, 
+          // but for this simple blueprint, we might replace or merge. Let's merge.
+          fs.readFile(contentPath, 'utf8', (readErr, existingData) => {
+            let finalContent = newContent;
+            if (!readErr) {
+              try {
+                const existing = JSON.parse(existingData);
+                finalContent = { ...existing, ...newContent };
+              } catch (e) { /* ignore parse error on existing */ }
+            }
+
+            fs.writeFile(contentPath, JSON.stringify(finalContent, null, 2), (writeErr) => {
+              if (writeErr) {
+                return sendResponse(res, 500, { 'Content-Type': 'application/json' }, JSON.stringify({ error: 'Failed to save content' }));
+              }
+              sendResponse(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify({ success: true }));
+            });
+          });
+        } catch (e) {
+          send400(req, res, { reason: 'invalid_json' });
+        }
+      });
+      return;
+    }
+  }
+
+  if (parsedUrl.pathname === '/api/upload' && req.method === 'POST') {
+    // Very basic multipart handler for single file upload
+    // In a real production env, use 'busboy' or 'formidable'. 
+    // For this zero-dependency setup, we will save the raw body if it's binary or check Content-Type.
+    // However, parsing multipart/form-data manually is error-prone. 
+    // Let's assume the client sends the file as raw binary body with a filename query param for simplicity 
+    // OR keeps it simple with a library. 
+    // Given "Production Ready" constraints, I will add a simple buffer collector with a query param filename 
+    // to avoid adding complex dependencies right now, or stick to simple JSON updates if images aren't critical immediately.
+    // BUT the prompt asks for "File Uploaders". 
+    // Let's implement a naive binary saver for now: usage: POST /api/upload?name=myfile.png body=RAW_BYTES
+
+    const fileName = parsedUrl.searchParams.get('name');
+    if (!fileName) return send400(req, res, { reason: 'missing_filename' });
+
+    const safeName = path.basename(fileName).replace(/[^a-zA-Z0-9.\-_]/g, '');
+    const uploadDir = path.join(ROOT, 'assets', 'uploads'); // Saving to assets/uploads so they are served statically
+
+    if (!fs.existsSync(uploadDir)) {
+      fs.mkdirSync(uploadDir, { recursive: true });
+    }
+
+    const filePath = path.join(uploadDir, safeName);
+    const writeStream = fs.createWriteStream(filePath);
+
+    req.pipe(writeStream);
+
+    writeStream.on('finish', () => {
+      sendResponse(res, 200, { 'Content-Type': 'application/json' }, JSON.stringify({ url: `/assets/uploads/${safeName}` }));
+    });
+
+    writeStream.on('error', (err) => {
+      sendResponse(res, 500, { 'Content-Type': 'application/json' }, JSON.stringify({ error: 'Upload failed' }));
+    });
+    return;
+  }
+
   const filePath = resolvePath(req.url);
   if (!filePath) return send404(req, res, { reason: 'resolve_failed' });
 

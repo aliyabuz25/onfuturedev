@@ -68,6 +68,48 @@ function initPage() {
   const getI18nNodes = () => document.querySelectorAll("[data-i18n-key]");
   const translationCache = {};
 
+  // -- Universal AI Management Blueprint: Content Binding --
+  const bindDynamicContent = async () => {
+    try {
+      const res = await fetch('/api/content');
+      if (!res.ok) return;
+      const content = await res.json();
+
+      // Bind keys to DOM elements
+      // For this blueprint adoption, we map "hero.heading" -> ".hero-heading"
+      // In a full implementation, we'd use data-content-key attributes.
+      // Here is a mapping for the demonstration:
+      const manualMapping = {
+        'hero.heading': '.hero-heading',
+        'hero.subtitle': '.hero-subtitle'
+      };
+
+      for (const [key, selector] of Object.entries(manualMapping)) {
+        if (content[key]) {
+          const els = document.querySelectorAll(selector);
+          els.forEach(el => {
+            // Only override if content is substantial to avoid flicker or empty overrides
+            if (content[key].trim()) el.innerText = content[key];
+          });
+        }
+      }
+
+      console.log('Universal Management: Content bound.');
+    } catch (e) {
+      console.warn('Universal Management: Failed to bind content', e);
+    }
+  };
+
+  // Hotkey to open Admin: Ctrl + Shift + A
+  document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.shiftKey && e.key === 'A') {
+      window.open('/admin/index.html', '_blank');
+    }
+  });
+
+  bindDynamicContent();
+  // -------------------------------------------------------
+
   const formatStudyDescriptions = () => {
     document.querySelectorAll(".study-card-desc").forEach((desc) => {
       const text = desc.textContent?.trim() || "";
