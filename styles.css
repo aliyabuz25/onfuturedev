@@ -451,13 +451,16 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .hero-badge {
     display: inline-flex;
+    min-width: 247px;
+    height: 36px;
     padding: 4px;
     align-items: center;
-    gap: 12px;
+    gap: 8px;
     border-radius: 24px;
-    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    border: 0.5px solid #C1BFF3;
     background: rgba(20, 19, 45, 0.6);
     backdrop-filter: blur(4px);
+    box-sizing: border-box;
 }
 
 .hero-badge-tag {
