@@ -3154,10 +3154,13 @@ body>div[id$="-container"]:not(#hero-container) {
     position: fixed;
     top: 0;
     left: 0;
-    width: 100vw;
+    right: 0;
+    bottom: 0;
+    width: 100%;
     height: 100vh;
+    height: 100dvh;
     background-color: #14132D;
-    z-index: 99999999999 !important;
+    z-index: 2147483647 !important;
     display: flex;
     flex-direction: column;
     padding: 0;
@@ -3165,6 +3168,7 @@ body>div[id$="-container"]:not(#hero-container) {
     visibility: hidden;
     transition: opacity 0.3s ease, visibility 0.3s ease;
     overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .mobile-menu-overlay.active {
