@@ -542,8 +542,8 @@ body>div[id$="-container"]:not(#hero-container) {
 /* --- Desktop Navbar Refactor (>= 992px) --- */
 @media (min-width: 992px) {
     .hero-nav {
-        margin: clamp(20px, 4vw, 44px) 0 0 !important;
-        padding: 0 clamp(24px, 5vw, 80px) !important;
+        margin: 44px 0 0 !important;
+        padding: 0 80px !important;
         background: transparent !important;
     }
 
@@ -559,7 +559,7 @@ body>div[id$="-container"]:not(#hero-container) {
     }
 
     .hero-nav .navbar-brand {
-        margin-right: clamp(24px, 6vw, 87px) !important;
+        margin-right: 87px !important;
         padding: 0 !important;
         display: flex !important;
         align-items: center !important;
@@ -576,7 +576,7 @@ body>div[id$="-container"]:not(#hero-container) {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: clamp(16px, 3vw, 40px) !important;
+        gap: 40px !important;
         /* Spacing between nav links */
         margin: 0 !important;
         padding: 0 !important;
@@ -620,7 +620,7 @@ body>div[id$="-container"]:not(#hero-container) {
         align-items: center !important;
         gap: 32px !important;
         /* Spacing between internal action items */
-        margin-left: clamp(24px, 6vw, 87px) !important;
+        margin-left: 87px !important;
         flex-shrink: 0 !important;
     }
 
