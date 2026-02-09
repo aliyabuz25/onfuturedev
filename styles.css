@@ -644,6 +644,11 @@ body>div[id$="-container"]:not(#hero-container) {
     .hero-nav .cta-button {
         margin-left: 0 !important;
     }
+
+    /* Target navbars on sub-pages to give them 80px left margin as requested */
+    body>div[id^="hero-container"]:not(#hero-container) .hero-nav {
+        margin-left: 80px !important;
+    }
 }
 
 
