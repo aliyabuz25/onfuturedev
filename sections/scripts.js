@@ -32,24 +32,8 @@ async function loadSections() {
 }
 
 function initPage() {
-  const dropdown = document.querySelector(".dropdown");
-  if (!dropdown) return;
+  const dropdowns = document.querySelectorAll(".dropdown");
   const navLinks = document.querySelectorAll(".nav-link");
-  const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
-  const menu = dropdown.querySelector(".dropdown-menu");
-  const arrowIcon = toggle?.querySelector(".dropdown-arrow-icon");
-  const languageLabel = dropdown.querySelector(".language-label");
-  const languageFlag = dropdown.querySelector(".language-flag");
-  const languageButtons = dropdown.querySelectorAll(".dropdown-item");
-  const hero = document.getElementById("hero");
-  const globe = document.querySelector(".globe-wrap");
-  const ellipse = document.querySelector(".ellipse");
-  const heroElementWrap = document.querySelector(".hero-element-wrap");
-  let heroElement = heroElementWrap?.querySelector(".hero-element");
-  let heroElementAnimating = false;
-  const studyTabs = document.querySelectorAll(".study-tab");
-  const studyCards = document.querySelectorAll(".study-card");
-  const techTabs = document.querySelectorAll(".tech-tab");
   const techGrids = document.querySelectorAll(".tech-grid");
   const techProgramsGrid = document.querySelector('.tech-grid[data-tab="tech"]');
   const faqItems = document.querySelectorAll(".faq-item");
@@ -57,10 +41,74 @@ function initPage() {
   const LANGUAGE_MAP = {
     AZE: "az",
     USA: "en",
+    ENG: "en"
   };
   const DEFAULT_LANGUAGE = "AZE";
   const getI18nNodes = () => document.querySelectorAll("[data-i18n-key]");
   const translationCache = {};
+
+  const closeMenu = (dropdown) => {
+    dropdown.classList.remove("show");
+    const menu = dropdown.querySelector(".dropdown-menu");
+    const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
+    menu?.classList.remove("show");
+    toggle?.setAttribute("aria-expanded", "false");
+  };
+
+  const closeAllMenus = () => {
+    dropdowns.forEach(closeMenu);
+  };
+
+  const toggleMenu = (event) => {
+    event.stopPropagation();
+    const dropdown = event.currentTarget.closest(".dropdown");
+    if (!dropdown) return;
+
+    const isOpen = dropdown.classList.toggle("show");
+    const menu = dropdown.querySelector(".dropdown-menu");
+    const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
+
+    if (menu) menu.classList.toggle("show", isOpen);
+    toggle?.setAttribute("aria-expanded", isOpen ? "true" : "false");
+
+    // Close other dropdowns
+    dropdowns.forEach(d => {
+      if (d !== dropdown) closeMenu(d);
+    });
+  };
+
+  const handleSelection = (button) => {
+    const dropdown = button.closest(".dropdown");
+    const lang = button.dataset.lang;
+    const flag = button.dataset.flag;
+    const label = dropdown?.querySelector(".language-label");
+    const mainFlag = dropdown?.querySelector(".language-flag");
+
+    if (lang && label) label.textContent = lang;
+    if (flag && mainFlag) mainFlag.src = flag;
+
+    dropdown?.querySelectorAll(".dropdown-item").forEach((btn) => {
+      if (btn === button) {
+        btn.setAttribute("aria-current", "true");
+      } else {
+        btn.removeAttribute("aria-current");
+      }
+    });
+
+    if (dropdown) closeMenu(dropdown);
+    updateLanguageByAttr(lang);
+  };
+
+  // Initialize dropdowns
+  dropdowns.forEach(dropdown => {
+    const toggle = dropdown.querySelector('[data-bs-toggle="dropdown"]');
+    const items = dropdown.querySelectorAll(".dropdown-item");
+
+    toggle?.addEventListener("click", toggleMenu);
+    items.forEach(item => {
+      item.addEventListener("click", () => handleSelection(item));
+    });
+  });
 
   const formatStudyDescriptions = () => {
     document.querySelectorAll(".study-card-desc").forEach((desc) => {
@@ -94,64 +142,6 @@ function initPage() {
       }
     });
     formatStudyDescriptions();
-  };
-
-  const addProgram = (
-    badgetext,
-    title,
-    img,
-    desc,
-    lessoncoynt,
-    { badgeKey, titleKey, descKey, lessonsKey = "tech.lessonCount", applyKey = "tech.apply" } = {}
-  ) => {
-    const card = document.createElement("div");
-    card.className = "tech-card";
-
-    const chip = document.createElement("div");
-    chip.className = "tech-chip";
-    chip.textContent = badgetext;
-    if (badgeKey) chip.dataset.i18nKey = badgeKey;
-
-    const heading = document.createElement("h3");
-    heading.textContent = title;
-    if (titleKey) heading.dataset.i18nKey = titleKey;
-
-    const media = document.createElement("div");
-    media.className = "tech-media";
-    const image = document.createElement("img");
-    image.src = img;
-    image.alt = badgetext;
-    media.appendChild(image);
-
-    const description = document.createElement("p");
-    description.className = "tech-desc";
-    description.textContent = desc;
-    if (descKey) description.dataset.i18nKey = descKey;
-
-    const footer = document.createElement("div");
-    footer.className = "tech-footer";
-
-    const lessons = document.createElement("div");
-    lessons.className = "tech-lessons";
-    const icon = document.createElement("img");
-    icon.src = "/elements/book.svg";
-    icon.alt = "Book icon";
-    icon.width = 20;
-    icon.height = 20;
-    const lessonSpan = document.createElement("span");
-    lessonSpan.textContent = lessoncoynt;
-    if (lessonsKey) lessonSpan.dataset.i18nKey = lessonsKey;
-    lessons.append(icon, lessonSpan);
-
-    const button = document.createElement("button");
-    button.className = "tech-apply";
-    button.type = "button";
-    button.textContent = "Müraciət et";
-    if (applyKey) button.dataset.i18nKey = applyKey;
-
-    footer.append(lessons, button);
-    card.append(chip, heading, media, description, footer);
-    return card;
   };
 
   if (techProgramsGrid) {
@@ -237,6 +227,9 @@ function initPage() {
   };
 
   const alignEllipses = () => {
+    const hero = document.getElementById("hero");
+    const globe = document.querySelector(".globe-wrap");
+    const ellipse = document.querySelector(".ellipse");
     if (!hero || !globe || !ellipse) return;
     const heroRect = hero.getBoundingClientRect();
     const globeRect = globe.getBoundingClientRect();
@@ -253,48 +246,10 @@ function initPage() {
     ellipse.style.opacity = "1";
   };
 
-  const closeMenu = () => {
-    dropdown.classList.remove("show");
-    menu?.classList.remove("show");
-    toggle?.setAttribute("aria-expanded", "false");
-    if (arrowIcon) {
-      arrowIcon.src = "/elements/arrow-down.svg";
-    }
-  };
-
-  const toggleMenu = (event) => {
-    event.stopPropagation();
-    const isOpen = dropdown.classList.toggle("show");
-    if (menu) {
-      menu.classList.toggle("show", isOpen);
-    }
-    toggle?.setAttribute("aria-expanded", isOpen ? "true" : "false");
-    if (arrowIcon) {
-      arrowIcon.src = isOpen ? "/Navbar/arrow-down.png" : "/elements/arrow-down.svg";
-    }
-  };
-
-  const handleSelection = (button) => {
-    const lang = button.dataset.lang;
-    const flag = button.dataset.flag;
-    if (lang && languageLabel) {
-      languageLabel.textContent = lang;
-    }
-    if (flag && languageFlag) {
-      languageFlag.src = flag;
-    }
-    languageButtons.forEach((btn) => {
-      if (btn === button) {
-        btn.setAttribute("aria-current", "true");
-      } else {
-        btn.removeAttribute("aria-current");
-      }
-    });
-    closeMenu();
-    updateLanguageByAttr(lang);
-  };
-
   const enableHeroElementSwap = () => {
+    const heroElementWrap = document.querySelector(".hero-element-wrap");
+    let heroElement = heroElementWrap?.querySelector(".hero-element");
+    let heroElementAnimating = false;
     if (!heroElementWrap || !heroElement) return;
 
     const handleHover = () => {
@@ -346,6 +301,8 @@ function initPage() {
   };
 
   const setupStudyTabs = () => {
+    const studyTabs = document.querySelectorAll(".study-tab");
+    const studyCards = document.querySelectorAll(".study-card");
     if (!studyTabs.length || !studyCards.length) return;
 
     const activateDegree = (degree) => {
@@ -369,6 +326,8 @@ function initPage() {
   };
 
   const setupTechTabs = () => {
+    const techTabs = document.querySelectorAll(".tech-tab");
+    const techGrids = document.querySelectorAll(".tech-grid");
     if (!techTabs.length || !techGrids.length) return;
 
     const activateTab = (tabName) => {
@@ -389,6 +348,7 @@ function initPage() {
   };
 
   const setupFaq = () => {
+    const faqItems = document.querySelectorAll(".faq-item");
     if (!faqItems.length) return;
 
     faqItems.forEach((item) => {
@@ -408,10 +368,6 @@ function initPage() {
     });
   };
 
-  languageButtons.forEach((btn) => {
-    btn.addEventListener("click", () => handleSelection(btn));
-  });
-
   updateLanguageByAttr(DEFAULT_LANGUAGE);
   alignEllipses();
   window.addEventListener("resize", alignEllipses);
@@ -421,12 +377,10 @@ function initPage() {
   setupTechTabs();
   setupFaq();
 
-  toggle?.addEventListener("click", toggleMenu);
-  menu?.addEventListener("click", (event) => event.stopPropagation());
-  document.addEventListener("click", closeMenu);
+  document.addEventListener("click", closeAllMenus);
   document.addEventListener("keydown", (event) => {
     if (event.key === "Escape") {
-      closeMenu();
+      closeAllMenus();
     }
   });
   setActiveNavByPath(navLinks);

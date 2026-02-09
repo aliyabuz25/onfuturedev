@@ -1,19 +1,21 @@
 <style>
     #hero {
-        height: 540px !important;
+        height: 682px !important;
         background: linear-gradient(180deg, #14132D 0%, #191838 20%, #1E1D43 40%, #28265A 60%, #3D3A86 100%);
     }
 
     #hero .hero-content {
-        top: clamp(100px, 12vw, 130px);
         gap: 12px;
-        width: min(1180px, 100%);
+        width: 100%;
+        max-width: 1440px;
         margin-inline: auto;
         text-align: center;
         display: flex;
         flex-direction: column;
         align-items: center;
         padding-inline: 20px;
+        margin-top: 40px;
+        padding-bottom: 156px;
     }
 
     #hero .hero-heading {
@@ -34,7 +36,7 @@
         }
     }
 </style>
-<div style="height: 540px !important;" id="hero" class="">
+<div style="height: 682px !important;" id="hero" class="">
 
 
     <nav class="navbar navbar-expand-lg navbar-dark hero-nav">
@@ -84,10 +86,10 @@
                                 </button>
                             </li>
                             <li>
-                                <button type="button" class="dropdown-item" data-lang="USA" data-flag="/tedris/usa.png"
+                                <button type="button" class="dropdown-item" data-lang="ENG" data-flag="/tedris/usa.png"
                                     data-rect-flag="/tedris/usa.png">
                                     <img src="/tedris/usa.png" alt="USA flag" class="dropdown-flag-icon">
-                                    <span>USA</span>
+                                    <span>ENG</span>
                                     <img src="/selected-ar/Frame.svg" alt="" class="dropdown-selected-indicator">
                                 </button>
                             </li>
@@ -102,10 +104,9 @@
     </nav>
     <div class="hero-content">
 
-        <p class="hero-heading" data-i18n-key="hero.heading">Xaricdə təhsil yolculuğunuza peşəkar dəstək ilə başlayın.
-        </p>
-        <p class="hero-subtitle" data-i18n-key="hero.subtitle">İxtisas seçimi, sənədləşmə və viza dəstəyi — hamısı bir
-            mərkəzdə.</p>
+        <p class="hero-heading" data-i18n-key="hero.heading">Xaricdə Təhsil və Təqaüd İmkanlarını Kəşf Edin</p>
+        <p class="hero-subtitle" data-i18n-key="hero.subtitle">Xaricdə təhsil üçün proqram, ölkə və təqaüd seçimlərinə
+            dair dəqiq yol xəritəsi.</p>
         <div class="hero-actions">
             <button class="hero-cta" type="button">
                 <span class="hero-cta-text" data-i18n-key="hero.cta">Müraciət et</span>

@@ -1,52 +1,59 @@
 <style>
-.scholarship-button {
-  display:flex;
-  width:206px;
-  height:44px;
-  padding:12px 16px;
-  justify-content:center;
-  align-items:center;
-  gap:10px;
-  border-radius:24px;
-  background:var(--Primary-Color-Main,#6560E0);
-  color: var(--Neutral-Color-50, #FFF);
-  text-align: center;
-  text-decoration:none;
-  font-family: var(--Font-Family-Button, Poppins);
-  font-size: var(--Font-Size-14, 14px);
-  font-style: normal;
-  font-weight: 400 !important;
-  line-height: var(--Line-Height-20, 20px);
-  transition:filter 0.2s ease, transform 0.1s ease;
-}
-.scholarship-button:hover {
-  filter:brightness(1.08);
-}
-.scholarship-button:active {
-  filter:brightness(0.92);
-  transform:translateY(1px);
-}
-.scholarship-grid {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 32px;
-}
-.scholarship-card {
-  background: #fff;
-  border-radius: 20px;
-  padding: 32px;
-  box-shadow: 0 10px 25px rgba(0,0,0,.05);
-  border: 1px solid #f1f5f9;
-}
-@media (max-width: 768px) {
+  .scholarship-button {
+    display: flex;
+    width: 206px;
+    height: 44px;
+    padding: 12px 16px;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    border-radius: 24px;
+    background: #fff;
+    border: 2px solid var(--Primary-Color-Main, #6560E0);
+    color: var(--Primary-Color-Main, #6560E0);
+    text-align: center;
+    text-decoration: none;
+    font-family: var(--Font-Family-Button, Poppins);
+    font-size: var(--Font-Size-14, 14px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Line-Height-20, 20px);
+    transition: filter 0.2s ease, transform 0.1s ease;
+  }
+
+  .scholarship-button:hover {
+    filter: brightness(1.08);
+  }
+
+  .scholarship-button:active {
+    filter: brightness(0.92);
+    transform: translateY(1px);
+  }
+
   .scholarship-grid {
-    grid-template-columns: 1fr;
-    gap: 20px;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 32px;
   }
+
   .scholarship-card {
-    padding: 24px;
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+    border: 1px solid #f1f5f9;
   }
-}
+
+  @media (max-width: 768px) {
+    .scholarship-grid {
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+
+    .scholarship-card {
+      padding: 24px;
+    }
+  }
 </style>
 <section id="section6" style="
   background:#ffffff;
@@ -58,8 +65,11 @@
   <div style="max-width:1200px;margin:0 auto;padding:0 24px;">
 
     <div style="text-align:center;margin-bottom:16px;">
-      <div style="padding:4px 12px 4px 8px; background: var(--Primary-Color-50, #F5F5FC); border-radius: 24px; display: inline-flex; justify-content: center; align-items: center; gap: 10px;">
-        <div style="text-align: center; color: var(--Primary-Color-Main, #6560E0); font-size: 12px; font-family: Poppins; font-weight: 500; line-height: 16px; word-wrap: break-word">- SCHOLARSHIPS</div>
+      <div
+        style="padding:4px 12px 4px 8px; background: var(--Primary-Color-50, #F5F5FC); border-radius: 24px; display: inline-flex; justify-content: center; align-items: center; gap: 10px;">
+        <div
+          style="text-align: center; color: var(--Primary-Color-Main, #6560E0); font-size: 12px; font-family: Poppins; font-weight: 500; line-height: 16px; word-wrap: break-word">
+          - SCHOLARSHIPS</div>
       </div>
     </div>
 
@@ -120,9 +130,8 @@
           font-weight: 400;
           line-height: var(--Line-Height-24, 24px);
         ">
-          Azərbaycan vətəndaşları üçün nəzərdə tutulan dövlət təqaüdü proqramı,
-          gənclərin dünyanın aparıcı və reytinqli universitetlərində magistratura
-          səviyyəsində tam maliyyələşdirilmiş təhsil almalarına şərait yaradır
+          Azərbaycan vətəndaşları üçün nəzərdə tutulan dövlət təqaüdü proqramı, gənclərin dünyanın aparıcı və reytinqli
+          universitetlərində magistratura səviyyəsində tam maliyyələşdirilmiş təhsil almalarına şərait yaradır
         </p>
         <div style="border-top:1px solid #e5e7eb;padding-top:20px;margin-bottom:20px;">
           <strong style="
@@ -136,23 +145,35 @@
         </div>
         <ul style="list-style:none;padding:0;margin:0 0 28px;">
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Təhsil haqqı</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Təhsil
+              haqqı</span>
           </li>
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Aylıq təqaüd (~120–150 AZN)</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Aylıq
+              təqaüd (Ölkəyə görə dəyişir)</span>
           </li>
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Yataqxana və ya kirayə dəstəyi</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Yataqxana
+              və ya kirayə dəstəyi</span>
           </li>
           <li style="display:flex;align-items:center;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Tibbi sığorta</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Tibbi
+              sığorta</span>
           </li>
         </ul>
-        <a href="#" class="scholarship-button">Contact us</a>
+        <a href="/elaqe" class="scholarship-button">Əlaqə</a>
       </div>
 
       <div class="scholarship-card">
@@ -169,7 +190,7 @@
           justify-content: center;
           flex: 1 0 0;
           align-self: stretch;
-        ">Prezident Təqaüdü</h3>
+        ">Hökumətlərarası DP Proqramı</h3>
         <p style="
           margin-bottom:24px;
           color: var(--Neutral-Color-600, #525252);
@@ -179,9 +200,8 @@
           font-weight: 400;
           line-height: var(--Line-Height-24, 24px);
         ">
-          Xüsusi akademik göstəricilərə malik tələbələr üçün nəzərdə tutulmuş
-          yüksək məbləğli təqaüd proqramıdır və aparıcı xarici universitetlərdə
-          təhsili tam şəkildə əhatə edir.
+          Azərbaycan vətəndaşları üçün nəzərdə tutulan dövlət təqaüdü proqramı, gənclərin dünyanın aparıcı və reytinqli
+          universitetlərində magistratura səviyyəsində tam maliyyələşdirilmiş təhsil almalarına şərait yaradır
         </p>
         <div style="border-top:1px solid #e5e7eb;padding-top:20px;margin-bottom:20px;">
           <strong style="
@@ -195,23 +215,35 @@
         </div>
         <ul style="list-style:none;padding:0;margin:0 0 28px;">
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Təhsil haqqı</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Təhsil
+              haqqı</span>
           </li>
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Yüksək aylıq təqaüd</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Aylıq
+              təqaüd (Ölkəyə görə dəyişir)</span>
           </li>
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Beynəlxalq sığorta</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Yataqxana
+              və ya kirayə dəstəyi</span>
           </li>
           <li style="display:flex;align-items:center;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Uçuş xərcləri</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Tibbi
+              sığorta</span>
           </li>
         </ul>
-        <a href="#" class="scholarship-button">Contact us</a>
+        <a href="/elaqe" class="scholarship-button">Əlaqə</a>
       </div>
 
       <div class="scholarship-card">
@@ -253,19 +285,28 @@
         </div>
         <ul style="list-style:none;padding:0;margin:0 0 28px;">
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Təhsil haqqı endirimi</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Təhsil
+              haqqı endirimi</span>
           </li>
           <li style="display:flex;align-items:center;margin-bottom:12px;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Yaşayış dəstəyi</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Yaşayış
+              dəstəyi</span>
           </li>
           <li style="display:flex;align-items:center;">
-            <span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
-            <span style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Tədris materialları</span>
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Tədris
+              materialları</span>
           </li>
         </ul>
-        <a href="#" class="scholarship-button">Contact us</a>
+        <a href="/elaqe" class="scholarship-button">Əlaqə</a>
       </div>
 
       <div class="scholarship-card">
@@ -282,20 +323,60 @@
           justify-content: center;
           flex: 1 0 0;
           align-self: stretch;
-        ">Beynəlxalq Fondlar</h3>
-        <p style="font-size:14px;color:#6b7280;line-height:1.6;margin-bottom:24px;">
-          Beynəlxalq təşkilatlar və fondlar tərəfindən maliyyələşdirilən
-          xaricdə təhsil proqramları.
+        ">Chevening Scholarship</h3>
+        <p style="
+          margin-bottom:24px;
+          color: var(--Neutral-Color-600, #525252);
+          font-family: var(--Font-Family-Body, Poppins);
+          font-size: var(--Font-Size-16, 16px);
+          font-style: normal;
+          font-weight: 400;
+          line-height: var(--Line-Height-24, 24px);
+        ">
+          Azərbaycan vətəndaşları üçün nəzərdə tutulan dövlət təqaüdü proqramı, gənclərin dünyanın aparıcı və reytinqli
+          universitetlərində magistratura səviyyəsində tam maliyyələşdirilmiş təhsil almalarına şərait yaradır
         </p>
         <div style="border-top:1px solid #e5e7eb;padding-top:20px;margin-bottom:20px;">
-          <strong>Əhatə edir</strong>
+          <strong style="
+            color: var(--Neutral-Color-1100, #000);
+            font-family: var(--Font-Family-Headline, 'DM Sans');
+            font-size: var(--Font-Size-18, 18px);
+            font-style: normal;
+            font-weight: 500;
+            line-height: var(--Line-Height-24, 24px);
+          ">Əhatə edir</strong>
         </div>
         <ul style="list-style:none;padding:0;margin:0 0 28px;">
-          <li style="display:flex;align-items:center;margin-bottom:12px;"><span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>Təhsil haqqı</li>
-          <li style="display:flex;align-items:center;margin-bottom:12px;"><span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>Aylıq yaşayış xərci</li>
-          <li style="display:flex;align-items:center;"><span style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>Sığorta və viza dəstəyi</li>
+          <li style="display:flex;align-items:center;margin-bottom:12px;">
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Təhsil
+              haqqı</span>
+          </li>
+          <li style="display:flex;align-items:center;margin-bottom:12px;">
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Aylıq
+              təqaüd (Ölkəyə görə dəyişir)</span>
+          </li>
+          <li style="display:flex;align-items:center;margin-bottom:12px;">
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Yataqxana
+              və ya kirayə dəstəyi</span>
+          </li>
+          <li style="display:flex;align-items:center;">
+            <span
+              style="width:20px;height:20px;border-radius:50%;background:#4f46e5;color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;margin-right:12px;">✓</span>
+            <span
+              style="color: var(--Neutral-Color-800, #262626); font-family: var(--Font-Family-Body, Poppins); font-size: var(--Font-Size-16, 16px); font-style: normal; font-weight: 400; line-height: var(--Line-Height-24, 24px); flex: 1 0 0;">Tibbi
+              sığorta</span>
+          </li>
         </ul>
-        <a href="#" class="scholarship-button">Contact us</a>
+        <a href="/elaqe" class="scholarship-button">Əlaqə</a>
       </div>
 
     </div>
