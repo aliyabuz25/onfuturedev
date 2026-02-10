@@ -1,0 +1,59 @@
+{
+    "brand": {
+        "logo": "/logo/onfuture-logo.png",
+        "alt": "Logo",
+        "link": "/index.html"
+    },
+    "links": [
+        {
+            "text": "Ana səhifə",
+            "link": "/index.html",
+            "active": true,
+            "i18nKey": "nav.home"
+        },
+        {
+            "text": "Xaricdə Təhsil",
+            "link": "/pages/Təhsil.html",
+            "i18nKey": "nav.education"
+        },
+        {
+            "text": "Akademiya",
+            "link": "/pages/Akademiya.html",
+            "i18nKey": "nav.academy"
+        },
+        {
+            "text": "Əlaqə",
+            "link": "/pages/Eleqa.html",
+            "i18nKey": "nav.contact"
+        }
+    ],
+    "actions": {
+        "search": {
+            "icon": "/elements/Frame.svg",
+            "alt": "Search"
+        },
+        "language": {
+            "current": "AZE",
+            "flag": "/flags/Flags.svg",
+            "options": [
+                {
+                    "code": "AZE",
+                    "flag": "/flags/Flags.svg",
+                    "rectFlag": "/flags/Flags.svg",
+                    "current": true
+                },
+                {
+                    "code": "ENG",
+                    "flag": "/tedris/usa.png",
+                    "rectFlag": "/tedris/usa.png",
+                    "current": false
+                }
+            ]
+        },
+        "cta": {
+            "text": "Müraciət et",
+            "link": "#",
+            "i18nKey": "nav.cta"
+        }
+    }
+}

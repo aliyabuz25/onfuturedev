@@ -18,11 +18,52 @@ const SECTION_TARGETS = [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-  console.log("Versiyon: 1.7.0");
+  console.log("Versiyon: 1.8.0 - With Barba.js");
+
+  // Initial load
+  initApp();
+
+  // Initialize Barba
+  initBarba();
+});
+
+function initApp() {
   loadSections()
+    .then(loadNavbar)
     .then(initPage)
     .catch((error) => console.error("Section load failed", error));
-});
+}
+
+function initBarba() {
+  barba.init({
+    sync: true,
+    transitions: [{
+      async leave(data) {
+        const done = this.async();
+        await gsap.to(data.current.container, {
+          opacity: 0,
+          x: -100, // Slide left
+          duration: 0.4,
+          ease: "power2.inOut"
+        });
+        done();
+      },
+      async enter(data) {
+        gsap.from(data.next.container, {
+          opacity: 0,
+          x: 100, // Enter from right
+          duration: 0.4,
+          ease: "power2.out",
+          clearProps: "all"
+        });
+        initApp(); // Re-initialize app for the new page
+      },
+      async once(data) {
+        initApp();
+      }
+    }]
+  });
+}
 
 async function loadSections() {
   const promises = SECTION_TARGETS.map(async ({ id, path }) => {
@@ -37,6 +78,90 @@ async function loadSections() {
     }
   });
   await Promise.all(promises);
+}
+
+async function loadNavbar() {
+  const container = document.getElementById("navbar-container");
+  if (!container) return;
+  try {
+    const response = await fetch("/data/navbar.json");
+    if (!response.ok) throw new Error("Failed to load navbar.json");
+    const data = await response.json();
+
+    const currentPath = window.location.pathname;
+
+    const navHtml = `
+    <nav class="navbar navbar-expand-lg navbar-dark hero-nav">
+        <div class="container-fluid">
+            <!-- Brand -->
+            <a class="navbar-brand" href="${data.brand.link}">
+                <img src="${data.brand.logo}" alt="${data.brand.alt}" class="logo-img">
+            </a>
+
+            <!-- Mobile Toggler -->
+            <button class="navbar-toggler custom-toggler" type="button" aria-controls="mainNav" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <!-- Desktop Menu (Hidden on Mobile) -->
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav">
+                    ${data.links.map(link => `
+                    <li class="nav-item">
+                        <a class="nav-link ${currentPath === link.link ? 'active' : ''}" 
+                           aria-current="${currentPath === link.link ? 'page' : 'false'}" 
+                           href="${link.link}" 
+                           data-i18n-key="${link.i18nKey}">
+                           ${link.text}
+                        </a>
+                    </li>
+                    `).join('')}
+                </ul>
+
+                <!-- Actions -->
+                <div class="hero-nav-actions">
+                    <button class="search-button btn btn-link" type="button" aria-label="${data.actions.search.alt}">
+                        <img src="${data.actions.search.icon}" alt="${data.actions.search.alt}" width="20" height="20">
+                    </button>
+
+                    <div class="dropdown">
+                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            <img src="${data.actions.language.flag}" alt="Language flag" class="language-flag">
+                            <span class="language-label">${data.actions.language.current}</span>
+                            <img src="/elements/arrow-down.svg" alt="Arrow down" class="dropdown-arrow-icon">
+                        </button>
+                        <ul class="dropdown-menu">
+                            ${data.actions.language.options.map(opt => `
+                            <li>
+                                <button type="button" class="dropdown-item" 
+                                    aria-current="${opt.current}" 
+                                    data-lang="${opt.code}"
+                                    data-flag="${opt.flag}" 
+                                    data-rect-flag="${opt.rectFlag}">
+                                    <img src="${opt.flag}" alt="${opt.code} flag" class="dropdown-flag-icon">
+                                    <span>${opt.code}</span>
+                                    <img src="/selected-ar/Frame.svg" alt="" class="dropdown-selected-indicator">
+                                </button>
+                            </li>
+                            `).join('')}
+                        </ul>
+                    </div>
+
+                    <button class="cta-button" type="button" onclick="window.location.href='${data.actions.cta.link}'">
+                        <span data-i18n-key="${data.actions.cta.i18nKey}">${data.actions.cta.text}</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>`;
+
+    container.innerHTML = navHtml;
+
+  } catch (e) {
+    console.error("Navbar load failed", e);
+  }
 }
 
 function initPage() {
@@ -856,3 +981,4 @@ function setupMobileMenu() {
     });
   }
 }
+

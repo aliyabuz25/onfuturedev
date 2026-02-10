@@ -543,7 +543,7 @@ body>div[id$="-container"]:not(#hero-container) {
 @media (min-width: 992px) {
     .hero-nav {
         margin: 44px 0 0 !important;
-        padding: 0 80px !important;
+        padding: 0 clamp(20px, 5vw, 60px) !important;
         background: transparent !important;
         display: flex !important;
         justify-content: center !important;
@@ -556,7 +556,7 @@ body>div[id$="-container"]:not(#hero-container) {
         gap: 0 !important;
         padding: 0 !important;
         margin: 0 !important;
-        max-width: 1440px !important;
+        max-width: 1280px !important;
         width: 100% !important;
     }
 
@@ -646,9 +646,9 @@ body>div[id$="-container"]:not(#hero-container) {
     }
 
     /* Target navbars on sub-pages to give them 80px left margin as requested */
-    body>div[id^="hero-container"]:not(#hero-container) .hero-nav {
-        margin-left: 80px !important;
-    }
+    /* body>div[id^="hero-container"]:not(#hero-container) .hero-nav {
+        margin-left: clamp(20px, 5vw, 60px) !important;
+    } */
 }
 
 
@@ -2123,16 +2123,16 @@ body>div[id$="-container"]:not(#hero-container) {
     background: #FFF;
     border-top: 1px solid #EEE;
     padding: 0;
-    width: calc(100% + clamp(16px, 4vw, 60px) * 2);
-    margin-left: calc(-1 * clamp(16px, 4vw, 60px));
-    margin-right: calc(-1 * clamp(16px, 4vw, 60px));
+    width: calc(100% + clamp(20px, 5vw, 60px) * 2);
+    margin-left: calc(-1 * clamp(20px, 5vw, 60px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 60px));
 }
 
 .footer-inner {
     width: 100%;
     max-width: 1440px;
     margin: 0 auto;
-    padding: 44px 0;
+    padding: 44px 80px;
     display: flex;
     gap: 134px;
     align-items: flex-start;
