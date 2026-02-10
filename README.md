@@ -24,3 +24,9 @@ docker compose up -d --build
 ### CI/CD Guidelines
 - Ensure `logs.json` is mapped to a persistent volume.
 - Update `traefik.http.routers.onfuture-web.rule` label if domain changes.
+
+## New Features (v1.8.0)
+- **Dynamic Navbar**: Loaded from `data/navbar.json` for consistent updates across all pages.
+- **Smooth Page Transitions**: Implemented using **Barba.js** and **GSAP**.
+    - **"Book-like" Slide Effect**: Pages slide horizontally (Right-to-Left) during navigation.
+    - **Scoped Initialization**: Scripts re-initialize automatically after each transition to ensure interactivity (dropdowns, tabs, etc.) works seamlessly.

@@ -21,16 +21,16 @@ document.addEventListener("DOMContentLoaded", () => {
   console.log("Versiyon: 1.8.0 - With Barba.js");
 
   // Initial load
-  initApp();
+  initApp(document);
 
   // Initialize Barba
   initBarba();
 });
 
-function initApp() {
-  loadSections()
-    .then(loadNavbar)
-    .then(initPage)
+function initApp(scope = document) {
+  loadSections(scope)
+    .then(() => loadNavbar(scope))
+    .then(() => initPage(scope))
     .catch((error) => console.error("Section load failed", error));
 }
 
@@ -56,18 +56,18 @@ function initBarba() {
           ease: "power2.out",
           clearProps: "all"
         });
-        initApp(); // Re-initialize app for the new page
+        initApp(data.next.container); // Re-initialize app scoped to new container
       },
       async once(data) {
-        initApp();
+        initApp(data.next.container);
       }
     }]
   });
 }
 
-async function loadSections() {
+async function loadSections(scope = document) {
   const promises = SECTION_TARGETS.map(async ({ id, path }) => {
-    const container = document.getElementById(id);
+    const container = scope.querySelector(`#${id}`);
     if (!container) return;
     try {
       const response = await fetch(path);
@@ -80,8 +80,8 @@ async function loadSections() {
   await Promise.all(promises);
 }
 
-async function loadNavbar() {
-  const container = document.getElementById("navbar-container");
+async function loadNavbar(scope = document) {
+  const container = scope.querySelector("#navbar-container");
   if (!container) return;
   try {
     const response = await fetch("/data/navbar.json");
@@ -164,34 +164,34 @@ async function loadNavbar() {
   }
 }
 
-function initPage() {
-  const dropdown = document.querySelector(".dropdown");
-  const navLinks = document.querySelectorAll(".nav-link");
+function initPage(scope = document) {
+  const dropdown = scope.querySelector(".dropdown");
+  const navLinks = scope.querySelectorAll(".nav-link");
   const toggle = dropdown?.querySelector('[data-bs-toggle="dropdown"]');
   const menu = dropdown?.querySelector(".dropdown-menu");
   const arrowIcon = toggle?.querySelector(".dropdown-arrow-icon");
   const languageLabel = dropdown?.querySelector(".language-label");
   const languageFlag = dropdown?.querySelector(".language-flag");
   const languageButtons = dropdown?.querySelectorAll(".dropdown-item") || [];
-  const hero = document.getElementById("hero");
-  const globe = document.querySelector(".globe-wrap");
-  const ellipse = document.querySelector(".ellipse");
-  const heroElementWrap = document.querySelector(".hero-element-wrap");
+  const hero = scope.querySelector("#hero");
+  const globe = scope.querySelector(".globe-wrap");
+  const ellipse = scope.querySelector(".ellipse");
+  const heroElementWrap = scope.querySelector(".hero-element-wrap");
   let heroElement = heroElementWrap?.querySelector(".hero-element");
   let heroElementAnimating = false;
-  const studyTabs = document.querySelectorAll(".study-tab");
-  const studyCards = document.querySelectorAll(".study-card");
-  const techTabs = document.querySelectorAll(".tech-tab");
-  const techGrids = document.querySelectorAll(".tech-grid");
-  const techProgramsGrid = document.querySelector('.tech-grid[data-tab="tech"]');
-  const faqItems = document.querySelectorAll(".faq-item");
+  const studyTabs = scope.querySelectorAll(".study-tab");
+  const studyCards = scope.querySelectorAll(".study-card");
+  const techTabs = scope.querySelectorAll(".tech-tab");
+  const techGrids = scope.querySelectorAll(".tech-grid");
+  const techProgramsGrid = scope.querySelector('.tech-grid[data-tab="tech"]');
+  const faqItems = scope.querySelectorAll(".faq-item");
 
   const LANGUAGE_MAP = {
     AZE: "az",
     USA: "en",
   };
   const DEFAULT_LANGUAGE = "AZE";
-  const getI18nNodes = () => document.querySelectorAll("[data-i18n-key]");
+  const getI18nNodes = () => scope.querySelectorAll("[data-i18n-key]");
   const translationCache = {};
 
   // -- Universal AI Management Blueprint: Content Binding --
@@ -208,7 +208,7 @@ function initPage() {
 
       // 2. Universal Binding (Text & Images)
       // Supports data-i18n-key AND data-content-key
-      const reactiveElements = document.querySelectorAll("[data-i18n-key], [data-content-key]");
+      const reactiveElements = scope.querySelectorAll("[data-i18n-key], [data-content-key]");
 
       reactiveElements.forEach(el => {
         const key = el.getAttribute('data-content-key') || el.getAttribute('data-i18n-key');
@@ -239,7 +239,7 @@ function initPage() {
   };
 
   function renderDynamicServices(content) {
-    const container = document.querySelector('.services-grid-inner');
+    const container = scope.querySelector('.services-grid-inner');
     if (!container) return;
 
     const services = {};
@@ -271,7 +271,7 @@ function initPage() {
   }
 
   function renderDynamicStudy(content) {
-    const container = document.querySelector('.study-cards');
+    const container = scope.querySelector('.study-cards');
     if (!container) return;
 
     const cards = {};
@@ -320,7 +320,7 @@ function initPage() {
   // -------------------------------------------------------
 
   const formatStudyDescriptions = () => {
-    document.querySelectorAll(".study-card-desc").forEach((desc) => {
+    scope.querySelectorAll(".study-card-desc").forEach((desc) => {
       const text = desc.textContent?.trim() || "";
       const match = text.match(/\s[-–—]\s/);
       if (!match || typeof match.index !== "number") return;
@@ -774,7 +774,7 @@ function initPage() {
   };
 
   const setupTestimonials = () => {
-    const container = document.querySelector("[data-testimonials]");
+    const container = scope.querySelector("[data-testimonials]");
     if (!container) return;
     const track = container.querySelector("[data-track]");
     const viewport = container.querySelector("[data-viewport]");
@@ -822,44 +822,44 @@ function initPage() {
     };
 
     // Hero CTA
-    document.querySelector(".hero-cta")?.addEventListener("click", redirectToContact);
-    document.querySelector(".cta-button")?.addEventListener("click", redirectToContact);
+    scope.querySelector(".hero-cta")?.addEventListener("click", redirectToContact);
+    scope.querySelector(".cta-button")?.addEventListener("click", redirectToContact);
 
     // Tech / Academy Cards
-    document.addEventListener("click", (e) => {
+    scope.addEventListener("click", (e) => {
       if (e.target.closest(".tech-apply")) {
         redirectToContact();
       }
     });
 
     // Study Cards
-    document.addEventListener("click", (e) => {
+    scope.addEventListener("click", (e) => {
       if (e.target.closest(".study-card-apply")) {
         redirectToContact();
       }
     });
 
     // Visa Cards
-    document.querySelectorAll(".visa-support-card").forEach(card => {
+    scope.querySelectorAll(".visa-support-card").forEach(card => {
       card.addEventListener("click", redirectToContact);
       card.style.cursor = "pointer";
     });
 
     // Service Cards
-    document.querySelectorAll(".service-card").forEach(card => {
+    scope.querySelectorAll(".service-card").forEach(card => {
       card.addEventListener("click", redirectToContact);
       card.style.cursor = "pointer";
     });
 
     // Scholarship Banner CTA
-    document.addEventListener("click", (e) => {
+    scope.addEventListener("click", (e) => {
       if (e.target.closest(".scholarship-banner-cta")) {
         redirectToContact();
       }
     });
 
     // Scholarship Buttons
-    document.addEventListener("click", (e) => {
+    scope.addEventListener("click", (e) => {
       if (e.target.closest(".scholarship-button")) {
         e.preventDefault();
         redirectToContact();
@@ -892,9 +892,9 @@ function initPage() {
   setupApplicationRedirects();
 
   const setupPhoneDropdown = () => {
-    const toggle = document.getElementById('phoneDropdownToggle');
-    const menu = document.getElementById('phoneDropdownMenu');
-    const selected = document.getElementById('selectedPhonePrefix');
+    const toggle = scope.querySelector('#phoneDropdownToggle');
+    const menu = scope.querySelector('#phoneDropdownMenu');
+    const selected = scope.querySelector('#selectedPhonePrefix');
     if (!toggle || !menu || !selected) return;
 
     toggle.addEventListener('click', (e) => {
@@ -902,7 +902,7 @@ function initPage() {
       menu.classList.toggle('show');
     });
 
-    document.querySelectorAll('.hero-phone-item').forEach(item => {
+    scope.querySelectorAll('.hero-phone-item').forEach(item => {
       item.addEventListener('click', () => {
         const prefix = item.dataset.prefix;
         const flag = item.dataset.flag;
@@ -911,7 +911,7 @@ function initPage() {
       });
     });
 
-    document.addEventListener('click', () => {
+    scope.addEventListener('click', () => {
       menu.classList.remove('show');
     });
   };
@@ -925,11 +925,11 @@ function initPage() {
     }
   });
   setupPhoneDropdown();
-  setActiveNavByPath(navLinks);
-  setupMobileMenu();
+  setActiveNavByPath(navLinks, scope);
+  setupMobileMenu(scope);
 }
 
-function setActiveNavByPath(navLinks) {
+function setActiveNavByPath(navLinks, scope = document) {
   if (!navLinks || !navLinks.length) return;
   const path = decodeURIComponent(window.location.pathname);
 
@@ -937,7 +937,7 @@ function setActiveNavByPath(navLinks) {
   navLinks.forEach((link) => link.classList.remove("active"));
 
   // Update Mobile Nav
-  const mobileOverlay = document.querySelector('.mobile-menu-overlay');
+  const mobileOverlay = scope.querySelector('.mobile-menu-overlay');
   const mobileLinks = mobileOverlay ? mobileOverlay.querySelectorAll('.mobile-nav-link') : [];
   mobileLinks.forEach(link => link.classList.remove('active'));
 
@@ -955,10 +955,10 @@ function setActiveNavByPath(navLinks) {
 }
 
 /* --- Mobile Menu Logic --- */
-function setupMobileMenu() {
-  const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-  const customToggler = document.querySelector('.custom-toggler');
-  const closeBtn = document.querySelector('.mobile-menu-close');
+function setupMobileMenu(scope = document) {
+  const mobileMenuOverlay = scope.querySelector('.mobile-menu-overlay');
+  const customToggler = scope.querySelector('.custom-toggler');
+  const closeBtn = scope.querySelector('.mobile-menu-close');
 
   if (mobileMenuOverlay && customToggler && closeBtn) {
     customToggler.addEventListener('click', (e) => {
