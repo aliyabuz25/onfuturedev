@@ -7,7 +7,7 @@ const morgan = require('morgan');
 
 const app = express();
 const PORT = process.env.PORT || 6985;
-const ROOT = process.cwd();
+const ROOT = __dirname;
 
 // --- Configuration ---
 const uploadDir = path.join(ROOT, 'assets', 'uploads');

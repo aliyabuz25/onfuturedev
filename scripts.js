@@ -1,3 +1,14 @@
+// Helper to handle relative paths for both root and subpages
+function getAssetPath(path) {
+  if (!path.startsWith('/')) return path;
+
+  // Check if we are in /pages/ or another subdirectory
+  const isSubPage = window.location.pathname.includes('/pages/');
+  const cleanPath = path.substring(1);
+
+  return isSubPage ? `../${cleanPath}` : cleanPath;
+}
+
 const SECTION_TARGETS = [
   { id: "hero-container", path: "/sections/hero.html" },
   { id: "hero-container2", path: "/sections/hero sec.html" },
@@ -70,7 +81,7 @@ async function loadSections(scope = document) {
     const container = scope.querySelector(`#${id}`);
     if (!container) return;
     try {
-      const response = await fetch(path);
+      const response = await fetch(getAssetPath(path));
       if (!response.ok) return;
       container.innerHTML = await response.text();
     } catch (e) {
@@ -84,7 +95,7 @@ async function loadNavbar(scope = document) {
   const container = scope.querySelector("#navbar-container");
   if (!container) return;
   try {
-    const response = await fetch("/data/navbar.json");
+    const response = await fetch(getAssetPath("/data/navbar.json"));
     if (!response.ok) throw new Error("Failed to load navbar.json");
     const data = await response.json();
 
@@ -130,7 +141,7 @@ async function loadNavbar(scope = document) {
                             aria-expanded="false">
                             <img src="${data.actions.language.flag}" alt="Language flag" class="language-flag">
                             <span class="language-label">${data.actions.language.current}</span>
-                            <img src="/elements/arrow-down.svg" alt="Arrow down" class="dropdown-arrow-icon">
+                            <img src="${getAssetPath('/elements/arrow-down.svg')}" alt="Arrow down" class="dropdown-arrow-icon">
                         </button>
                         <ul class="dropdown-menu">
                             ${data.actions.language.options.map(opt => `
@@ -142,7 +153,7 @@ async function loadNavbar(scope = document) {
                                     data-rect-flag="${opt.rectFlag}">
                                     <img src="${opt.flag}" alt="${opt.code} flag" class="dropdown-flag-icon">
                                     <span>${opt.code}</span>
-                                    <img src="/selected-ar/Frame.svg" alt="" class="dropdown-selected-indicator">
+                                    <img src="${getAssetPath('/selected-ar/Frame.svg')}" alt="" class="dropdown-selected-indicator">
                                 </button>
                             </li>
                             `).join('')}
@@ -197,7 +208,7 @@ function initPage(scope = document) {
   // -- Universal AI Management Blueprint: Content Binding --
   const bindDynamicContent = async () => {
     try {
-      const res = await fetch('/api/content');
+      const res = await fetch(getAssetPath('/api/content'));
       if (!res.ok) return;
       const content = await res.json();
 
@@ -386,7 +397,7 @@ function initPage(scope = document) {
     const lessons = document.createElement("div");
     lessons.className = "tech-lessons";
     const icon = document.createElement("img");
-    icon.src = "/elements/book.svg";
+    icon.src = getAssetPath("/elements/book.svg");
     icon.alt = "Book icon";
     icon.width = 20;
     icon.height = 20;
@@ -512,7 +523,7 @@ function initPage(scope = document) {
       return translationCache[code];
     }
     try {
-      const response = await fetch(`/${code}.json`);
+      const response = await fetch(getAssetPath(`/${code}.json`));
       if (!response.ok) {
         throw new Error(`Unable to fetch ${code}.json`);
       }
@@ -602,7 +613,7 @@ function initPage(scope = document) {
     menu?.classList.remove("show");
     toggle?.setAttribute("aria-expanded", "false");
     if (arrowIcon) {
-      arrowIcon.src = "/elements/arrow-down.svg";
+      arrowIcon.src = getAssetPath("/elements/arrow-down.svg");
     }
   };
 
@@ -614,7 +625,7 @@ function initPage(scope = document) {
     }
     toggle?.setAttribute("aria-expanded", isOpen ? "true" : "false");
     if (arrowIcon) {
-      arrowIcon.src = isOpen ? "/Navbar/arrow-down.png" : "/elements/arrow-down.svg";
+      arrowIcon.src = isOpen ? getAssetPath("/Navbar/arrow-down.png") : getAssetPath("/elements/arrow-down.svg");
     }
   };
 
