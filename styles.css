@@ -584,7 +584,7 @@ body>div[id$="-container"]:not(#hero-container) {
         display: flex !important;
         flex-direction: row !important;
         align-items: center !important;
-        gap: 32px !important;
+        gap: 24px !important;
         /* Balanced gap to accommodate internal padding */
         margin: 0 !important;
         padding: 0 !important;
