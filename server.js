@@ -9,11 +9,34 @@ const app = express();
 const PORT = process.env.PORT || 6985;
 const ROOT = __dirname;
 
+// --- Self-Healing Data Mechanism for Docker Volumes ---
+const dataDir = path.join(ROOT, 'data');
+const defaultsDir = path.join(ROOT, 'data-defaults');
+
+if (!fs.existsSync(dataDir)) fs.mkdirSync(dataDir, { recursive: true });
+
+// If data is empty (common in fresh Portainer volume mounts), restore from defaults
+if (fs.existsSync(defaultsDir)) {
+  fs.readdirSync(defaultsDir).forEach(file => {
+    const targetPath = path.join(dataDir, file);
+    if (!fs.existsSync(targetPath)) {
+      fs.copyFileSync(path.join(defaultsDir, file), targetPath);
+      console.log(`[Self-Healing] Restored missing file: ${file}`);
+    }
+  });
+}
+
+const contentPath = path.join(dataDir, 'content.json');
+const navbarPath = path.join(dataDir, 'navbar.json');
+
+// Ensure files are at least valid empty objects to prevent 404/crash
+if (!fs.existsSync(contentPath)) fs.writeFileSync(contentPath, '{}');
+if (!fs.existsSync(navbarPath)) fs.writeFileSync(navbarPath, '{}');
+
 // --- Configuration ---
 const uploadDir = path.join(ROOT, 'assets', 'uploads');
 if (!fs.existsSync(uploadDir)) fs.mkdirSync(uploadDir, { recursive: true });
 
-const contentPath = path.join(ROOT, 'data', 'content.json');
 
 // --- Multer Storage ---
 const storage = multer.diskStorage({

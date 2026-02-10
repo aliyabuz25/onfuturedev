@@ -7,6 +7,7 @@ services:
       PORT: "6985"
       HOST: "0.0.0.0"
     volumes:
+      - /datastore/onfuture-web/data:/app/data
       - /datastore/onfuture-web/uploads:/app/assets/uploads
       - /datastore/onfuture-web/logs.json:/app/logs.json
     networks:
@@ -14,7 +15,7 @@ services:
     labels:
       - 'traefik.enable=true'
       - 'traefik.docker.network=edge'
-      # API & Media Router
+      # API, Data & Media Router (Priority 100)
       - 'traefik.http.routers.onfuture-api.rule=(Host(`onfuture.az`) || Host(`www.onfuture.az`)) && (PathPrefix(`/api`) || PathPrefix(`/assets/uploads`) || PathPrefix(`/cdn`) || PathPrefix(`/data`))'
       - 'traefik.http.routers.onfuture-api.entrypoints=web'
       - 'traefik.http.routers.onfuture-api.priority=100'
