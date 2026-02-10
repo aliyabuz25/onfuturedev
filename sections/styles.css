@@ -514,14 +514,13 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .hero-nav {
     display: flex;
-    max-width: 1440px;
     width: 100%;
     padding: 44px 80px;
     align-items: flex-start;
     gap: 87px;
     color: #dfe2ff;
     font-family: var(--Font-Family-Headline, "DM Sans");
-    margin: 0 auto 82px;
+    margin: 0 0 82px;
 }
 
 .hero-nav .navbar-brand {

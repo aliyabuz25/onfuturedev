@@ -547,7 +547,7 @@ body>div[id$="-container"]:not(#hero-container) {
         padding: 0 !important;
         background: transparent !important;
         display: flex !important;
-        justify-content: center !important;
+        justify-content: flex-start !important;
         width: 100% !important;
         position: relative !important;
         z-index: 1000 !important;
@@ -561,7 +561,6 @@ body>div[id$="-container"]:not(#hero-container) {
         padding: 44px 80px !important;
         /* Exact 44px top/bottom and 80px sides */
         margin: 0 !important;
-        max-width: 1440px !important;
         width: 100% !important;
     }
 
