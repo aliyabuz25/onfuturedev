@@ -1516,6 +1516,12 @@ body>div[id$="-container"]:not(#hero-container) {
     font-style: normal;
     font-weight: 500;
     line-height: var(--Line-Height-32, 32px);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    min-height: 64px;
 }
 
 .tech-media {
