@@ -29,6 +29,17 @@ if (fs.existsSync(defaultsDir)) {
 const contentPath = path.join(dataDir, 'content2.json');
 const navbarPath = path.join(dataDir, 'navbar.json');
 
+// --- Migration Logic ---
+const oldContentPath = path.join(dataDir, 'content.json');
+if (fs.existsSync(oldContentPath) && !fs.existsSync(contentPath)) {
+  try {
+    fs.renameSync(oldContentPath, contentPath);
+    console.log(`[Migration] Renamed content.json to content2.json`);
+  } catch (err) {
+    console.error(`[Migration] Failed to rename content.json:`, err);
+  }
+}
+
 // Ensure files are at least valid empty objects to prevent 404/crash
 if (!fs.existsSync(contentPath)) fs.writeFileSync(contentPath, '{}');
 if (!fs.existsSync(navbarPath)) fs.writeFileSync(navbarPath, '{}');
