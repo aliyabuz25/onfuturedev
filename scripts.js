@@ -692,15 +692,17 @@ function initPage(scope = document) {
 
   const setupStudyTabs = () => {
     const tabs = scope.querySelectorAll(".study-tab");
-    const cards = scope.querySelectorAll(".study-card");
 
-    if (!tabs.length || !cards.length) return;
+    if (!tabs.length) return;
 
     const activateDegree = (degree) => {
+      // Always re-query cards to handle dynamic content replacements
+      const currentCards = scope.querySelectorAll(".study-card");
+
       tabs.forEach((tab) => {
         tab.classList.toggle("active", tab.dataset.degree === degree);
       });
-      cards.forEach((card) => {
+      currentCards.forEach((card) => {
         const match = card.dataset.degree === degree;
         card.classList.toggle("hidden", !match);
       });
@@ -716,8 +718,9 @@ function initPage(scope = document) {
       });
     });
 
-    const initial = scope.querySelector(".study-tab.active")?.dataset.degree || tabs[0]?.dataset.degree;
-    if (initial) activateDegree(initial);
+    const activeTab = scope.querySelector(".study-tab.active");
+    if (activeTab) activateDegree(activeTab.dataset.degree || "");
+    else if (tabs[0]) activateDegree(tabs[0].dataset.degree || "");
   };
 
   const setupTechTabs = () => {
