@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="371" height="218" viewBox="0 0 371 218" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="371" height="218" rx="18" fill="url(#gradient-devops)" />
+  <defs>
+    <linearGradient id="gradient-devops" x1="0" y1="0" x2="371" y2="218" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8E2DE2" />
+      <stop offset="1" stop-color="#4A00E0" />
+    </linearGradient>
+  </defs>
+  <g fill="#fff">
+    <text x="32" y="120" font-family="Roboto, Arial, sans-serif" font-size="36" font-weight="700">DevOps</text>
+    <text x="32" y="150" font-family="Roboto, Arial, sans-serif" font-size="16" font-weight="500">CI/CD &amp; Cloud</text>
+    <text x="32" y="170" font-family="Roboto, Arial, sans-serif" font-size="14" font-weight="400">Docker • K8s • AWS • Linux</text>
+  </g>
+  <circle cx="305" cy="68" r="28" fill="rgba(255,255,255,0.15)" />
+  <circle cx="280" cy="40" r="18" fill="rgba(255,255,255,0.35)" />
+</svg>
