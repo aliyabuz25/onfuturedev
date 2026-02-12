@@ -40,7 +40,29 @@ document.addEventListener("DOMContentLoaded", () => {
   initBarba();
 });
 
+// Global path fixer for GitHub Pages subfolders
+function fixGitHubPagesPaths(scope = document) {
+  const isGitHubPages = window.location.hostname.includes("github.io") &&
+    window.location.pathname.split("/").length > 2;
+
+  if (!isGitHubPages) return;
+
+  const repoName = window.location.pathname.split("/")[1];
+  const baseUrl = `/${repoName}`;
+
+  // Fix images, scripts, links that start with /
+  const elements = scope.querySelectorAll('img[src^="/"], script[src^="/"], a[href^="/"], link[href^="/"]');
+  elements.forEach(el => {
+    const attr = el.tagName === 'A' || el.tagName === 'LINK' ? 'href' : 'src';
+    const path = el.getAttribute(attr);
+    if (path.startsWith('/') && !path.startsWith(baseUrl)) {
+      el.setAttribute(attr, `${baseUrl}${path}`);
+    }
+  });
+}
+
 function initApp(scope = document) {
+  fixGitHubPagesPaths(scope);
   loadSections(scope)
     .then(() => loadNavbar(scope))
     .then(() => initPage(scope))
