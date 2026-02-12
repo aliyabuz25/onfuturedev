@@ -56,7 +56,7 @@ function initBarba() {
         gsap.to(data.current.container, {
           opacity: 0,
           y: -10,
-          duration: 0.8,
+          duration: 0.3,
           ease: "power2.inOut",
           onComplete: done
         });
@@ -66,7 +66,7 @@ function initBarba() {
         gsap.from(data.next.container, {
           opacity: 0,
           y: 10,
-          duration: 0.8,
+          duration: 0.3,
           ease: "power2.out",
           clearProps: "all"
         });
@@ -76,7 +76,7 @@ function initBarba() {
         gsap.from(data.next.container, {
           opacity: 0,
           y: 10,
-          duration: 0.8,
+          duration: 0.3,
           ease: "power2.out",
           clearProps: "all"
         });
