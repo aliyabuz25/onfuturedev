@@ -3344,7 +3344,7 @@ body>div[id$="-container"]:not(#hero-container) {
 .scholarship-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 628px));
-    gap: 32px;
+    gap: 25px;
     justify-content: center;
 }
 
@@ -3423,7 +3423,7 @@ body>div[id$="-container"]:not(#hero-container) {
 }
 
 
-@media (max-width: 991px) {
+@media (max-width: 1370px) {
     .scholarship-grid {
         grid-template-columns: 1fr;
         max-width: 628px;

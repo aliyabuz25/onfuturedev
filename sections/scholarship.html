@@ -1,7 +1,7 @@
 <style>
   .scholarship-section {
     background: #ffffff;
-    padding: 44px 0;
+    padding: 50px 0;
     font-family: 'Poppins', sans-serif;
     color: #111827;
   }
@@ -9,7 +9,7 @@
   .scholarship-container {
     max-width: 1448px;
     margin: 0 auto;
-    padding: 0 80px;
+    padding: 0 17px;
     box-sizing: border-box;
   }
 
@@ -62,99 +62,92 @@
 
   .scholarship-grid {
     display: grid;
-    grid-template-columns: repeat(2, 628px);
-    gap: 24px;
-    row-gap: 44px;
-    width: 100%;
-    max-width: 1440px;
+    gap: 25px !important;
     justify-content: center;
-    margin: 0 auto;
-    box-sizing: border-box;
   }
 
   .scholarship-card {
-    background: #FFF;
-    border: 1px solid #E2E8F0;
+    background: #fff;
     border-radius: 16px;
     padding: 24px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, .05);
+    border: 1px solid #e2e8f0;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
-    gap: 32px;
-    box-shadow: 0px 4px 6px -2px rgba(166, 166, 166, 0.03), 0px 12px 16px -12px rgba(166, 166, 166, 0.08);
-    box-sizing: border-box;
     width: 628px;
-    height: auto;
+    /* Fixed width from spec */
     min-height: 488px;
+    /* Hug height spec value */
+    box-sizing: border-box;
   }
 
   .scholarship-card h3 {
-    color: #000;
-    font-family: var(--Font-Family-Headline, "DM Sans");
+    font-family: var(--Font-Family-Headline, 'DM Sans');
     font-size: 24px;
-    font-style: normal;
-    font-weight: 700;
+    font-weight: 500;
     line-height: 32px;
-    margin: 0;
+    color: #000;
+    margin: 0 0 12px;
   }
 
   .scholarship-card p {
-    color: #525252;
-    font-family: var(--Font-Family-Body, Poppins);
-    font-size: 16px;
-    font-style: normal;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
-    line-height: 24px;
-    margin: 0;
-    flex-grow: 0;
+    font-size: 14px;
+    color: #6b7280;
+    line-height: 20px;
+    margin: 12px 0 20px;
+    flex-grow: 1;
   }
 
   .scholarship-benefit-header {
-    color: #000;
-    font-family: var(--Font-Family-Headline, "DM Sans");
-    font-size: 18px;
-    font-weight: 700;
-    line-height: 28px;
-    border-top: 1px solid #E2E8F0;
+    border-top: 1px solid #e5e7eb;
     padding-top: 24px;
-    margin-bottom: 0;
-    width: 100%;
+    margin-bottom: 20px;
   }
 
+  .scholarship-benefit-header span {
+    font-family: var(--Font-Family-Headline, 'DM Sans');
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 24px;
+    color: #000;
+  }
 
   .scholarship-list {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    padding: 0;
-    margin: 0;
     list-style: none;
-    width: 100%;
+    padding: 0;
+    margin: 0 0 32px;
+    /* 32px gap to button as per spec */
   }
 
   .scholarship-list li {
     display: flex;
     align-items: center;
-    gap: 12px;
-    color: #0A0A0A;
-    font-family: var(--Font-Family-Body, Poppins);
-    font-size: 16px;
+    margin-bottom: 12px;
+    color: #262626;
+    font-family: 'Poppins', sans-serif;
     font-weight: 400;
+    font-size: 16px;
     line-height: 24px;
+  }
+
+  .scholarship-list li:last-child {
     margin-bottom: 0;
   }
 
   .scholarship-check {
-    display: flex;
-    width: 24px;
-    height: 24px;
-    justify-content: center;
-    align-items: center;
-    border-radius: 100px;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
     background: #6560E0;
-    flex-shrink: 0;
     color: #fff;
-    margin-right: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    margin-right: 12px;
+    flex-shrink: 0;
   }
 
   .scholarship-button {
@@ -166,31 +159,44 @@
     align-items: center;
     gap: 10px;
     border-radius: 24px;
-    background: transparent;
-    border: 1px solid #6560E0;
-    color: #6560E0;
-    font-family: var(--Font-Family-Body, Poppins);
-    font-size: 16px;
-    font-weight: 500;
-    line-height: 24px;
-    text-decoration: none;
-    margin-top: auto;
+    background: #fff;
+    border: 1px solid var(--Primary-Color-Main, #6560E0);
+    color: var(--Primary-Color-Main, #6560E0);
     text-align: center;
-    transition: all 0.2s ease;
+    text-decoration: none;
+    font-family: var(--Font-Family-Button, Poppins);
+    font-size: var(--Font-Size-14, 14px);
+    font-style: normal;
+    font-weight: 400;
+    line-height: var(--Line-Height-20, 20px);
+    transition: filter 0.2s ease, transform 0.1s ease;
   }
 
+  .scholarship-button:hover {
+    filter: brightness(1.08);
+  }
 
+  .scholarship-button:active {
+    filter: brightness(0.92);
+    transform: translateY(1px);
+  }
 
-  @media (max-width: 1440px) {
+  @media (max-width: 1280px) {
     .scholarship-container {
       padding: 0 40px;
     }
   }
 
-  @media (max-width: 1340px) {
+  @media (max-width: 991px) {
     .scholarship-grid {
       grid-template-columns: 1fr;
       max-width: 628px;
+      margin: 0 auto;
+    }
+
+    .scholarship-title {
+      font-size: 36px;
+      line-height: 44px;
     }
   }
 
