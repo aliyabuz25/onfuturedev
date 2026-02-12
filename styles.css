@@ -7,6 +7,11 @@
     --Font-Family-Caption: 'Poppins', sans-serif;
 }
 
+html {
+    background: #14132D;
+    min-height: 100%;
+}
+
 html,
 body {
     overflow-x: hidden;
@@ -19,8 +24,12 @@ body {
 
 body {
     background: #FFF;
-    padding-left: clamp(20px, 5vw, 60px);
-    padding-right: clamp(20px, 5vw, 60px);
+    max-width: 1440px;
+    margin: 0 auto !important;
+    padding-left: clamp(20px, 5vw, 80px);
+    padding-right: clamp(20px, 5vw, 80px);
+    position: relative;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 0.3);
 }
 
 input::selection,
@@ -61,9 +70,9 @@ body>div[id$="-container"]:not(#hero-container) {
     background: linear-gradient(180deg, #14132D 0%, #191838 20%, #1E1D43 40%, #28265A 60%, #3D3A86 100%);
     color: white;
     padding: 0;
-    width: calc(100% + clamp(20px, 5vw, 60px) * 2);
-    margin-left: calc(-1 * clamp(20px, 5vw, 60px));
-    margin-right: calc(-1 * clamp(20px, 5vw, 60px));
+    width: calc(100% + clamp(20px, 5vw, 80px) * 2);
+    margin-left: calc(-1 * clamp(20px, 5vw, 80px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 80px));
     height: 998px;
     /* Fixed height for desktop */
     min-height: 998px;
@@ -71,9 +80,9 @@ body>div[id$="-container"]:not(#hero-container) {
 }
 
 #hero {
-    width: calc(100% + clamp(20px, 5vw, 60px) * 2);
-    margin-left: calc(-1 * clamp(20px, 5vw, 60px));
-    margin-right: calc(-1 * clamp(20px, 5vw, 60px));
+    width: calc(100% + clamp(20px, 5vw, 80px) * 2);
+    margin-left: calc(-1 * clamp(20px, 5vw, 80px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 80px));
     overflow: hidden;
 }
 
@@ -155,13 +164,16 @@ body>div[id$="-container"]:not(#hero-container) {
     position: absolute;
     top: clamp(200px, 20vw, 220px);
     left: 50%;
-    transform: translateX(calc(-50% + 0.25px));
-    width: min(1000px, 95%);
+    transform: translateX(calc(-50% + 10px));
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 0;
     z-index: 5;
+    text-align: center;
 }
 
 .hero-grid {
@@ -432,27 +444,29 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .hero-heading {
     font-family: var(--Font-Family-Headline, "DM Sans");
-    font-size: clamp(32px, 5vw, 68px);
+    font-size: clamp(32px, 5vw, 70px);
     font-weight: 400 !important;
-    line-height: 1.1;
+    line-height: 1.2;
     color: var(--Neutral-Color-50, #FFF);
     text-align: center;
-    max-width: 900px;
-    margin: 16px auto 4px;
+    max-width: 964px;
+    margin: 16px auto 16px;
+    /* 16px spacing to subtitle */
     width: 100%;
     letter-spacing: -0.01em;
 }
 
 .hero-subtitle {
     color: #F7F6F6;
-    opacity: 1;
+    opacity: 0.9;
     font-family: var(--Font-Family-Headline, "DM Sans");
     font-size: var(--Font-Size-18, 18px);
     font-style: normal;
     font-weight: 400;
     line-height: var(--Line-Height-24, 24px);
     text-align: center;
-    max-width: 600px;
+    max-width: 800px;
+    /* Increased for better balance */
     margin: 0 auto;
 }
 
@@ -560,8 +574,9 @@ body>div[id$="-container"]:not(#hero-container) {
         gap: 0 !important;
         padding: 44px 80px !important;
         /* Exact 44px top/bottom and 80px sides */
-        margin: 0 !important;
+        margin: 0 auto !important;
         width: 100% !important;
+        max-width: 1440px !important;
     }
 
     .hero-nav .navbar-brand {
@@ -791,9 +806,6 @@ body>div[id$="-container"]:not(#hero-container) {
     margin: 0 auto;
     border: none;
     cursor: pointer;
-    position: relative;
-    top: -16px;
-    /* Pulled up by 3px */
     box-shadow: 0 4px 14px rgba(0, 0, 0, 0.1);
 }
 
@@ -873,7 +885,7 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .results-section {
     display: flex;
-    padding: 80px 80px 44px 80px;
+    padding: 80px 0 44px 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -992,7 +1004,7 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .services-section {
     display: flex;
-    padding: 60px 80px 44px 80px;
+    padding: 60px 0 44px 0;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1006,7 +1018,7 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     width: 100%;
     max-width: 100%;
-    padding: 90px !important;
+    padding: 90px 0 !important;
 
     flex-direction: column;
     align-items: flex-start;
@@ -1285,7 +1297,7 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     width: 100%;
     max-width: 100%;
-    padding: 60px 80px 44px 80px;
+    padding: 60px 0 44px 0;
     flex-direction: column;
     align-items: center;
     gap: 60px;
@@ -1506,7 +1518,7 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     width: 100%;
     max-width: 100%;
-    padding: 60px 80px 44px 80px;
+    padding: 60px 0 44px 0;
     flex-direction: column;
     align-items: flex-start;
     gap: 60px;
@@ -1593,11 +1605,14 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-grid {
     display: grid;
-    grid-template-columns: repeat(3, 411px);
+    grid-template-columns: repeat(3, 1fr);
     gap: 24px;
     justify-content: center;
     justify-items: center;
     width: 100%;
+    max-width: 1281px;
+    /* 411*3 + 24*2 = 1281 */
+    margin: 0 auto;
 }
 
 .tech-grid:not(.active) {
@@ -1606,7 +1621,8 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .tech-card {
     display: flex;
-    width: 411px !important;
+    width: 100% !important;
+    max-width: 411px;
     height: 522px !important;
     /* Height fixed to 522px as per user request to match the "Hug" visual */
     padding: 20px !important;
@@ -1965,7 +1981,7 @@ body>div[id$="-container"]:not(#hero-container) {
     width: 100%;
     box-sizing: border-box;
     margin: 44px 0;
-    padding: 60px 80px 44px 80px;
+    padding: 60px 0 44px 0;
     background: #ffffff;
 }
 
@@ -2141,9 +2157,9 @@ body>div[id$="-container"]:not(#hero-container) {
     background: #FFF;
     border-top: 1px solid #EEE;
     padding: 0;
-    width: calc(100% + clamp(20px, 5vw, 60px) * 2);
-    margin-left: calc(-1 * clamp(20px, 5vw, 60px));
-    margin-right: calc(-1 * clamp(20px, 5vw, 60px));
+    width: calc(100% + clamp(20px, 5vw, 80px) * 2);
+    margin-left: calc(-1 * clamp(20px, 5vw, 80px));
+    margin-right: calc(-1 * clamp(20px, 5vw, 80px));
 }
 
 #footer-container {
@@ -2338,7 +2354,7 @@ body>div[id$="-container"]:not(#hero-container) {
 
 .services-grid {
     align-self: stretch;
-    padding: 0 80px 44px 80px;
+    padding: 0 0 44px 0;
     background: var(--Neutral-Color-50, #FFF);
     display: flex;
     flex-direction: column;
@@ -2394,8 +2410,8 @@ body>div[id$="-container"]:not(#hero-container) {
     }
 
     .services-grid {
-        padding-left: 24px;
-        padding-right: 24px;
+        padding-left: 0;
+        padding-right: 0;
     }
 }
 
@@ -2510,7 +2526,7 @@ body>div[id$="-container"]:not(#hero-container) {
     .visa-section,
     .tech-courses,
     .faq-section {
-        padding: 44px 40px;
+        padding: 44px 0;
     }
 
     .study-cards,
@@ -3029,7 +3045,7 @@ body>div[id$="-container"]:not(#hero-container) {
     .visa-section,
     .tech-courses,
     .faq-section {
-        padding: 40px 16px !important;
+        padding: 40px 0 !important;
         margin-top: 40px !important;
         margin-left: 0 !important;
         margin-right: 0 !important;
@@ -3037,7 +3053,7 @@ body>div[id$="-container"]:not(#hero-container) {
     }
 
     .scholarship-banner {
-        padding: 40px 16px;
+        padding: 40px 0;
     }
 
     .scholarship-banner-inner {
@@ -3126,7 +3142,7 @@ body>div[id$="-container"]:not(#hero-container) {
     }
 
     .visa-section {
-        padding: 40px 16px !important;
+        padding: 40px 0 !important;
     }
 
     .visa-container {

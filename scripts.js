@@ -74,80 +74,33 @@ async function loadNavbar(scope = document) {
   const container = scope.querySelector("#navbar-container");
   if (!container) return;
   try {
-    const response = await fetch(getAssetPath(`/data/navbar.json?v=${Date.now()}`));
-    if (!response.ok) throw new Error("Failed to load navbar.json");
-    const data = await response.json();
-
-    const currentPath = window.location.pathname;
-
-    const navHtml = `
-    <nav class="navbar navbar-expand-lg navbar-dark hero-nav">
-        <div class="container-fluid">
-            <!-- Brand -->
-            <a class="navbar-brand" href="${data.brand.link}">
-                <img src="${data.brand.logo}" alt="${data.brand.alt}" class="logo-img">
-            </a>
-
-            <!-- Mobile Toggler -->
-            <button class="navbar-toggler custom-toggler" type="button" aria-controls="mainNav" aria-expanded="false"
-                aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-
-            <!-- Desktop Menu (Hidden on Mobile) -->
-            <div class="collapse navbar-collapse" id="mainNav">
-                <ul class="navbar-nav">
-                    ${data.links.map(link => `
-                    <li class="nav-item">
-                        <a class="nav-link ${currentPath === link.link ? 'active' : ''}" 
-                           aria-current="${currentPath === link.link ? 'page' : 'false'}" 
-                           href="${link.link}" 
-                           data-i18n-key="${link.i18nKey}">
-                           ${link.text}
-                        </a>
-                    </li>
-                    `).join('')}
-                </ul>
-
-                <!-- Actions -->
-                <div class="hero-nav-actions">
-                    <button class="search-button btn btn-link" type="button" aria-label="${data.actions.search.alt}">
-                        <img src="${data.actions.search.icon}" alt="${data.actions.search.alt}" width="20" height="20">
-                    </button>
-
-                    <div class="dropdown">
-                        <button class="btn dropdown-toggle" type="button" data-bs-toggle="dropdown"
-                            aria-expanded="false">
-                            <img src="${data.actions.language.flag}" alt="Language flag" class="language-flag">
-                            <span class="language-label">${data.actions.language.current}</span>
-                            <img src="${getAssetPath('/elements/arrow-down.svg')}" alt="Arrow down" class="dropdown-arrow-icon">
-                        </button>
-                        <ul class="dropdown-menu">
-                            ${data.actions.language.options.map(opt => `
-                            <li>
-                                <button type="button" class="dropdown-item" 
-                                    aria-current="${opt.current}" 
-                                    data-lang="${opt.code}"
-                                    data-flag="${opt.flag}" 
-                                    data-rect-flag="${opt.rectFlag}">
-                                    <img src="${opt.flag}" alt="${opt.code} flag" class="dropdown-flag-icon">
-                                    <span>${opt.code}</span>
-                                    <img src="${getAssetPath('/selected-ar/Frame.svg')}" alt="" class="dropdown-selected-indicator">
-                                </button>
-                            </li>
-                            `).join('')}
-                        </ul>
-                    </div>
-
-                    <button class="cta-button" type="button" onclick="window.location.href='${data.actions.cta.link}'">
-                        <span data-i18n-key="${data.actions.cta.i18nKey}">${data.actions.cta.text}</span>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>`;
-
+    // Load static HTML instead of JSON
+    const response = await fetch(getAssetPath(`/sections/navbar.html?v=${Date.now()}`));
+    if (!response.ok) throw new Error("Failed to load navbar.html");
+    const navHtml = await response.text();
     container.innerHTML = navHtml;
+
+    // Set active link based on current path
+    const currentPath = window.location.pathname;
+    const navLinks = container.querySelectorAll(".nav-link");
+
+    // Normalize path for root
+    const normalizedPath = currentPath === '/index.html' ? '/' : currentPath;
+
+    navLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      // Simple exact match or root match
+      const isActive = (href === '/' && (normalizedPath === '/' || normalizedPath === '/index.html')) ||
+        (href !== '/' && normalizedPath.startsWith(href));
+
+      if (isActive) {
+        link.classList.add('active');
+        link.setAttribute('aria-current', 'page');
+      } else {
+        link.classList.remove('active');
+        link.setAttribute('aria-current', 'false');
+      }
+    });
 
   } catch (e) {
     console.error("Navbar load failed", e);
@@ -498,7 +451,7 @@ function initPage(scope = document) {
       }
     });
     closeMenu();
-    updateLanguageByAttr(lang);
+    // updateLanguageByAttr(lang); // Disabled for now as per user request
   };
 
   const fadeFlagImage = (img, targetSrc) => {
