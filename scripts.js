@@ -1,7 +1,13 @@
 // Helper to handle relative paths for both root and subpages
 function getAssetPath(path) {
-  // We use domain-root absolute paths (starting with /) which browser resolves correctly
-  // for both root and /pages/ subpages on onfuture.az
+  // Check if we are on GitHub Pages (e.g., username.github.io/repo-name/)
+  const isGitHubPages = window.location.hostname.includes("github.io") &&
+    window.location.pathname.split("/").length > 2;
+
+  if (isGitHubPages && path.startsWith("/")) {
+    const repoName = window.location.pathname.split("/")[1];
+    return `/${repoName}${path}`;
+  }
   return path;
 }
 
