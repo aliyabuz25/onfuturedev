@@ -928,11 +928,11 @@ body>div[id$="-container"]:not(#hero-container) {
 .results-badge-text {
     text-align: center;
     color: var(--Primary-Color-Main, #6560E0);
-    font-size: var(--Font-Size-12, 12px);
-    font-family: var(--Font-Family-Caption, Poppins);
+    font-size: 12px;
+    font-family: "Poppins", sans-serif;
     font-style: normal;
     font-weight: 500;
-    line-height: var(--Line-Height-16, 16px);
+    line-height: 16px;
 }
 
 .results-heading-row {
@@ -946,8 +946,9 @@ body>div[id$="-container"]:not(#hero-container) {
 .results-title {
     color: var(--Neutral-Color-1100, #000);
     font-size: 48px;
-    font-family: "DM Sans";
+    font-family: "DM Sans", sans-serif;
     font-weight: 500;
+    font-style: normal;
     line-height: 56px;
     margin: 0;
     max-width: 516px !important;
@@ -996,11 +997,11 @@ body>div[id$="-container"]:not(#hero-container) {
     display: flex;
     align-items: center;
     color: var(--Neutral-Color-1100, #000);
-    font-size: var(--Font-Size-48, 48px);
-    font-family: var(--Font-Family-Headline, "DM Sans");
+    font-family: "DM Sans", sans-serif;
+    font-size: 48px;
     font-style: normal;
     font-weight: 500;
-    line-height: var(--Line-Height-56, 56px);
+    line-height: 56px;
     text-align: center;
 }
 

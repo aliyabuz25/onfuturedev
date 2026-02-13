@@ -52,14 +52,14 @@ if (fs.existsSync(defaultsDir)) {
    MIGRATION
 ===================================================== */
 
-const contentPath = path.join(dataDir, "content5.json");
+const contentPath = path.join(dataDir, "content4.json");
 const navbarPath = path.join(dataDir, "navbar.json");
-const oldContentPath = path.join(dataDir, "content4.json");
+const oldContentPath = path.join(dataDir, "content3.json");
 
 if (fs.existsSync(oldContentPath) && !fs.existsSync(contentPath)) {
   try {
     fs.renameSync(oldContentPath, contentPath);
-    console.log("[Migration] content4.json -> content5.json");
+    console.log("[Migration] content3.json -> content4.json");
   } catch (err) {
     console.error("[Migration] Failed:", err);
   }
