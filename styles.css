@@ -3408,7 +3408,7 @@ body>div[id$="-container"]:not(#hero-container) {
     line-height: 32px !important;
     /* Added 32px line-height */
     font-weight: 500 !important;
-    margin: 0 0 12px !important;
+    margin: 0 0 8px !important;
     font-family: var(--Font-Family-Headline, 'DM Sans') !important;
     color: #000 !important;
 }
@@ -3419,7 +3419,7 @@ body>div[id$="-container"]:not(#hero-container) {
     font-size: 14px !important;
     color: #6b7280;
     line-height: 20px !important;
-    margin: 12px 0 20px !important;
+    margin: 0 0 20px !important;
     /* Updated top to 12px, bottom 20px */
     flex-grow: 1;
 }
